@@ -95,6 +95,9 @@ img {
     height: 32px;
     margin-top: 4px;
   }
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .btn {
@@ -120,11 +123,19 @@ img {
   }
 }
 
-.cart {
+.cart,
+.favs {
   position: relative;
 }
 
-.cartCounter {
+.favs {
+  display: block;
+  &.isHidden {
+    display: none;
+  }
+}
+.cartCounter,
+.favsCounter {
   position: absolute;
   right: -21px;
   top: -10px;

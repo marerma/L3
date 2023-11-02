@@ -1,0 +1,23 @@
+.favorites {
+  &__in {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__empty {
+    display: none;
+  }
+
+  &.is__empty {
+    .favorites__empty {
+      display: block;
+    }
+
+    .favorites__in {
+      display: none;
+    }
+  }
+}
