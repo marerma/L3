@@ -43,7 +43,6 @@
     gap: 16px;
     align-self: stretch;
   }
-
 }
 
 .inputIcon {
@@ -53,4 +52,5 @@
   &:last-of-type {
     right: 0px;
   }
+  cursor: pointer;
 }
