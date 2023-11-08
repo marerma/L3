@@ -5,6 +5,7 @@ import html from './searchHint.tpl.html';
 
 export type SearchHint = {
   title: string;
+  href: string;
 };
 
 export class SearchHintItem {
@@ -22,15 +23,9 @@ export class SearchHintItem {
   }
 
   render() {
-    const { title } = this.searchHint;
-    this.view.searchHintTitle.innerText = title;
-    this.view.searchHintTitle.onclick = () => {
-      const input = document.querySelector(".searchpage__input");
-      if(!input) return;
-      if(input instanceof HTMLInputElement) {
-        input.value = title;
-      }
-    };
+    const { title, href } = this.searchHint;
+    this.view.searchHintTitle.textContent = title;
+    this.view.root.setAttribute('href', href);
   }
 
   createSeparator(textContent: string) {

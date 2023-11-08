@@ -5,9 +5,9 @@ import { SearchHintsList } from '../searchHintsList/searchHintsList';
 
 // тестовые данные
 const mockHints = [
-  { href: '/product?id=155334998', title: 'чехол iphone 13 pro'}, 
+  { href: '/product?id=23150481', title: 'чехол iphone 13 pro'}, 
   { href: '/product?id=155334998', title: 'коляски agex'}, 
-  { href: '/product?id=155334998', title: 'яндекс станция 2'}
+  { href: '/product?id=68988778', title: 'яндекс станция 2'}
 ];
 
 // тестовая страница для просмотра подсказок
