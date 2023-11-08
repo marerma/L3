@@ -1,9 +1,10 @@
+import { ProductData } from 'types';
+import { cartService } from '../../services/cart.service';
+import { statisticsService } from '../../services/statistics.service';
+import { formatPrice } from '../../utils/helpers';
 import { Component } from '../component';
 import { ProductList } from '../productList/productList';
-import { formatPrice } from '../../utils/helpers';
-import { ProductData } from 'types';
 import html from './productDetail.tpl.html';
-import { cartService } from '../../services/cart.service';
 
 class ProductDetail extends Component {
   more: ProductList;
@@ -36,11 +37,13 @@ class ProductDetail extends Component {
     const isInCart = await cartService.isInCart(this.product);
 
     if (isInCart) this._setInCart();
+    const eventTime = Date.now();
 
     fetch(`/api/getProductSecretKey?id=${id}`)
       .then((res) => res.json())
       .then((secretKey) => {
         this.view.secretKey.setAttribute('content', secretKey);
+        statisticsService.viewAction(this.product!, secretKey, eventTime);
       });
 
     fetch('/api/getPopularProducts')
@@ -52,8 +55,10 @@ class ProductDetail extends Component {
 
   private _addToCart() {
     if (!this.product) return;
+    const eventTime = Date.now();
 
     cartService.addProduct(this.product);
+    statisticsService.addToCartAction(this.product, eventTime);
     this._setInCart();
   }
 

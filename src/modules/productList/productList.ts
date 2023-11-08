@@ -30,6 +30,7 @@ export class ProductList {
       const productComp = new Product(product);
       productComp.render();
       productComp.attach(this.view.root);
+      productComp.addObserver();
     });
   }
 }

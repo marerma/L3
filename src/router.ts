@@ -1,8 +1,9 @@
 import { catalogComp } from './modules/catalog/catalog';
-import { notFoundComp } from './modules/notFound/notFound';
-import { homepageComp } from './modules/homepage/homepage';
-import { productDetailComp } from './modules/productDetail/productDetail';
 import { checkoutComp } from './modules/checkout/checkout';
+import { homepageComp } from './modules/homepage/homepage';
+import { notFoundComp } from './modules/notFound/notFound';
+import { productDetailComp } from './modules/productDetail/productDetail';
+import { statisticsService } from './services/statistics.service';
 
 const ROUTES = {
   '/': homepageComp,
@@ -24,11 +25,14 @@ export default class Router {
 
   route(e: any) {
     e.preventDefault();
+    const eventTime = Date.now();
 
+    const {href, pathname} = window.location;
     // @ts-ignore
-    const component = ROUTES[window.location.pathname] || notFoundComp;
+    const component = ROUTES[pathname] || notFoundComp;
 
     component.attach(this.$appRoot);
     component.render();
+    statisticsService.routeChange(href, eventTime);
   }
 }

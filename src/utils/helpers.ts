@@ -27,3 +27,8 @@ export const formatPrice = (price: number) => {
       .replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽'
   );
 };
+
+export const isEmpty = (value: any) => {
+    if(!value || !Object.keys(value).length) return true;
+    return false;
+}

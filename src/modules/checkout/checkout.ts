@@ -1,9 +1,10 @@
+import { ProductData } from 'types';
+import { cartService } from '../../services/cart.service';
+import { statisticsService } from '../../services/statistics.service';
+import { formatPrice } from '../../utils/helpers';
 import { Component } from '../component';
 import { Product } from '../product/product';
 import html from './checkout.tpl.html';
-import { formatPrice } from '../../utils/helpers';
-import { cartService } from '../../services/cart.service';
-import { ProductData } from 'types';
 
 class Checkout extends Component {
   products!: ProductData[];
@@ -30,11 +31,18 @@ class Checkout extends Component {
 
   private async _makeOrder() {
     await cartService.clear();
+    const eventTime = Date.now();
+
     fetch('/api/makeOrder', {
       method: 'POST',
       body: JSON.stringify(this.products)
-    });
-    window.location.href = '/?isSuccessOrder';
+    }).then((res) => 
+      {
+        if(res.ok) {
+          statisticsService.purchaseAction(this.products, eventTime);
+          window.location.href = '/?isSuccessOrder';
+        }
+      })
   }
 }
 
